@@ -1,4 +1,4 @@
-package com.lonbon.demo.core;
+package com.lonbon.cloud.demo;
 
 public interface HelloService {
     String hello(String name);

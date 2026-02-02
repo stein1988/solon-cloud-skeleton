@@ -1,4 +1,4 @@
-package com.lonbon.demo.core;
+package com.lonbon.cloud.demo;
 
 import com.easy.query.api.proxy.client.EasyEntityQuery;
 import com.easy.query.solon.annotation.Db;

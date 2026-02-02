@@ -1,4 +1,4 @@
-package com.lonbon.demo.core;
+package com.lonbon.cloud.demo;
 
 import com.zaxxer.hikari.HikariDataSource;
 import org.noear.solon.annotation.Bean;

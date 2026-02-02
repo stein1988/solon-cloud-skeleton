@@ -1,10 +1,10 @@
-package com.lonbon.demo.core;
+package com.lonbon.cloud.demo;
 
 import com.easy.query.core.annotation.Column;
 import com.easy.query.core.annotation.EntityProxy;
 import com.easy.query.core.annotation.Table;
 import com.easy.query.core.proxy.ProxyEntityAvailable;
-import com.lonbon.demo.core.proxy.TopicProxy;
+import com.lonbon.cloud.demo.proxy.TopicProxy;
 import lombok.Data;
 
 @Data

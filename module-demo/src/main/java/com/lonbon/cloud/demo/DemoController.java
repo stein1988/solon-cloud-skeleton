@@ -1,4 +1,4 @@
-package com.lonbon.demo.core;
+package com.lonbon.cloud.demo;
 
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Mapping;
