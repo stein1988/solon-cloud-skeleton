@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.noear</groupId>
+        <artifactId>solon-parent</artifactId>
+        <version>3.9.0</version>
+        <relativePath />
+    </parent>
+
+    <groupId>com.lonbon</groupId>
+    <artifactId>cloud</artifactId>
+    <version>1.0</version>
+
+    <packaging>pom</packaging>
+
+    <description>Demo project for Solon</description>
+
+    <modules>
+        <module>module-demo</module>
+    </modules>
+
+    <properties>
+        <java.version>25</java.version>
+        <solon.version>3.9.0</solon.version>
+        <lombok.version>1.18.42</lombok.version>
+        <easy-query.version>3.1.78</easy-query.version>
+        <HikariCP.verison>7.0.2</HikariCP.verison>
+        <postgresql.version>42.7.9</postgresql.version>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>solon-lib</artifactId>
+                <version>${solon.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>solon-cloud-gateway</artifactId>
+                <version>${solon.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>solon-logging-logback-jakarta</artifactId>
+                <version>${solon.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok.version}</version>
+                <scope>provided</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>org.noear</groupId>
+                <artifactId>solon-test</artifactId>
+                <version>${solon.version}</version>
+                <scope>test</scope>
+            </dependency>
+
+            <!-- 数据库连接池 -->
+            <dependency>
+                <groupId>com.zaxxer</groupId>
+                <artifactId>HikariCP</artifactId>
+                <version>${HikariCP.verison}</version>
+            </dependency>
+
+            <!-- postgresql驱动-->
+            <dependency>
+                <groupId>org.postgresql</groupId>
+                <artifactId>postgresql</artifactId>
+                <version>${postgresql.version}</version>
+            </dependency>
+
+            <!-- easy-query配合solon框架必须 -->
+            <dependency>
+                <groupId>com.easy-query</groupId>
+                <artifactId>sql-solon-plugin</artifactId>
+                <version>${easy-query.version}</version>
+            </dependency>
+            <!-- 如果您使用EasyEntityQuery那么需要引入该APT引用 -->
+            <dependency>
+                <groupId>com.easy-query</groupId>
+                <artifactId>sql-processor</artifactId>
+                <version>${easy-query.version}</version>
+            </dependency>
+            <!-- easy-query的数据库支持 -->
+            <dependency>
+                <groupId>com.easy-query</groupId>
+                <artifactId>sql-pgsql</artifactId>
+                <version>${easy-query.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <configuration>
+                    <annotationProcessorPaths>
+                        <path>
+                            <groupId>org.projectlombok</groupId>
+                            <artifactId>lombok</artifactId>
+                        </path>
+                        <path>
+                            <groupId>com.easy-query</groupId>
+                            <artifactId>sql-processor</artifactId>
+                            <version>${easy-query.version}</version>
+                        </path>
+                    </annotationProcessorPaths>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.noear</groupId>
+                <artifactId>solon-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>

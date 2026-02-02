@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>com.lonbon</groupId>
+        <artifactId>cloud</artifactId>
+        <version>1.0</version>
+    </parent>
+
+    <groupId>com.lonbon.cloud</groupId>
+    <artifactId>demo</artifactId>
+    <packaging>jar</packaging>
+    <name>cloud-demo</name>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-lib</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-cloud-gateway</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-logging-logback-jakarta</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-test</artifactId>
+        </dependency>
+
+        <!-- 数据库连接池 -->
+        <dependency>
+            <groupId>com.zaxxer</groupId>
+            <artifactId>HikariCP</artifactId>
+        </dependency>
+
+        <!-- postgresql驱动-->
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <!-- easy-query配合solon框架必须 -->
+        <dependency>
+            <groupId>com.easy-query</groupId>
+            <artifactId>sql-solon-plugin</artifactId>
+        </dependency>
+        <!-- 如果您使用EasyEntityQuery那么需要引入该APT引用 -->
+        <dependency>
+            <groupId>com.easy-query</groupId>
+            <artifactId>sql-processor</artifactId>
+        </dependency>
+        <!-- easy-query的数据库支持 -->
+        <dependency>
+            <groupId>com.easy-query</groupId>
+            <artifactId>sql-pgsql</artifactId>
+        </dependency>
+    </dependencies>
+
+
+</project>
