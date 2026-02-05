@@ -10,7 +10,7 @@ import lombok.Data;
 @Data
 @Table("t_topic")
 @EntityProxy
-public class Topic implements ProxyEntityAvailable<Topic , TopicProxy> {
+public class Topic implements ProxyEntityAvailable<Topic, TopicProxy> {
 
     @Column(primaryKey = true)
     private String id;

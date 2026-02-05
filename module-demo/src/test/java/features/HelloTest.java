@@ -1,6 +1,6 @@
 package features;
 
-import com.lonbon.demo.App;
+import com.lonbon.cloud.demo.App;
 
 import org.junit.jupiter.api.Test;
 

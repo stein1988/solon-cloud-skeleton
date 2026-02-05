@@ -1,0 +1,43 @@
+server.port: 8081
+
+solon.app:
+  name: 'user-app'
+  group: 'user'
+
+solon.logging:
+  appender:
+    console:
+      level: INFO
+    file:
+      level: INFO
+
+solon.dataSources:
+  db_master!:
+    class: "com.zaxxer.hikari.HikariDataSource" #数据源类
+    # PostgreSQL JDBC URL（注意格式：jdbc:postgresql://地址:端口/库名）
+    jdbcUrl: jdbc:postgresql://192.168.9.230:5432/solon_demo?useUnicode=true&characterEncoding=utf8&ssl=false
+    # 驱动类名（PostgreSQL 42.x 版本可省略，Solon 会自动识别）
+    driverClassName: org.postgresql.Driver
+    # 数据库账号密码
+    username: solon
+    password: solon@dev_2026
+    # HikariCP 连接池配置（Solon 原生支持，参数与 HikariCP 一致）
+    hikari:
+      maximum-pool-size: 10        # 最大连接数（根据业务调整，建议 5-20）
+      minimum-idle: 2              # 最小空闲连接
+      idle-timeout: 300000         # 空闲连接超时（5分钟，单位毫秒）
+      connection-timeout: 30000    # 连接获取超时（3秒）
+      keepalive-time: 60000        # 连接心跳检测（1分钟，PostgreSQL 推荐开启）
+      max-lifetime: 1800000        # 连接最大生命周期（30分钟）
+      # 连接有效性检测（PostgreSQL 推荐用 select 1）
+      validation-query: select 1
+      validation-query-timeout: 5000
+      test-while-idle: true        # 空闲时检测连接有效性
+      test-on-borrow: false        # 借用连接时不检测（提升性能，靠 idle 检测即可
+
+# 配置数据源对应的 easy-query 信息（要与 DataSource bean 的名字对上）
+easy-query.db_master:
+  name-conversion: underlined
+  database: pgsql
+  print-sql: true
+  delete-throw: true

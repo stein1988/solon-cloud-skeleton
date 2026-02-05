@@ -21,6 +21,9 @@
 
     <modules>
         <module>module-demo</module>
+        <module>module-common</module>
+        <module>module-base</module>
+        <module>module-user</module>
     </modules>
 
     <properties>
@@ -121,10 +124,6 @@
                         </path>
                     </annotationProcessorPaths>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.noear</groupId>
-                <artifactId>solon-maven-plugin</artifactId>
             </plugin>
         </plugins>
     </build>
