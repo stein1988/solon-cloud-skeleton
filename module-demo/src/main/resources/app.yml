@@ -41,3 +41,22 @@ easy-query.db_master:
   database: pgsql
   print-sql: true
   delete-throw: true
+
+knife4j.enable: true
+knife4j.basic.enable: true
+knife4j.basic.username: admin
+knife4j.basic.password: 123456
+knife4j.setting.enableOpenApi: true
+knife4j.setting.enableSwaggerModels: true
+knife4j.setting.enableFooter: true
+
+# Solon 资源映射：放行Knife4j所有静态资源和接口
+solon.resource:
+  # 映射Knife4j文档主页（核心，缺失则/doc.html无法访问）
+  mapping: /doc.html=classpath:/META-INF/resources/doc.html
+  # 批量映射静态资源和OpenAPI3接口（CSS/JS/图标/文档数据接口）
+  mappings:
+    /webjars/**=classpath:/META-INF/resources/webjars/
+    /v3/api-docs/**=classpath:/META-INF/resources/
+    /openapi/**=classpath:/META-INF/resources/
+    /knife4j/**=classpath:/META-INF/resources/

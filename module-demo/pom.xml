@@ -23,6 +23,16 @@
 
         <dependency>
             <groupId>org.noear</groupId>
+            <artifactId>solon-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-openapi3-knife4j</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
             <artifactId>solon-cloud-gateway</artifactId>
         </dependency>
 
