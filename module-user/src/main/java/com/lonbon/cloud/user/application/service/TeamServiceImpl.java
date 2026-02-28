@@ -19,20 +19,11 @@ public class TeamServiceImpl implements TeamService {
 
     @Override
     public Team createTeam(Team team) {
-        if (team.getId() == null) {
-            team.setId(UUID.randomUUID());
-        }
-        team.setCreatedAt(LocalDateTime.now());
-        team.setUpdatedAt(LocalDateTime.now());
-        team.setVersionId(0);
-        team.setDeleted(false);
         return teamRepository.save(team);
     }
 
     @Override
     public Team updateTeam(Team team) {
-        team.setUpdatedAt(LocalDateTime.now());
-        team.setVersionId(team.getVersionId() + 1);
         return teamRepository.save(team);
     }
 
@@ -72,7 +63,6 @@ public class TeamServiceImpl implements TeamService {
         List<Team> teams = teamRepository.findByTenantId(tenantId);
         for (Team team : teams) {
             team.setDefault(team.getId().equals(teamId));
-            team.setUpdatedAt(LocalDateTime.now());
             teamRepository.save(team);
         }
     }

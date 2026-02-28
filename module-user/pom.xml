@@ -12,16 +12,21 @@
 
     <groupId>com.lonbon.cloud</groupId>
     <artifactId>user</artifactId>
-    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>module-user</name>
     <description>用户业务模块</description>
 
     <dependencies>
+
         <dependency>
             <groupId>org.noear</groupId>
             <artifactId>solon-lib</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-web</artifactId>
         </dependency>
 
         <dependency>
@@ -30,8 +35,25 @@
         </dependency>
 
         <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-logging-logback</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-test</artifactId>
+        </dependency>
+
+        <!-- 本地模块依赖 -->
+        <dependency>
+            <groupId>com.lonbon.cloud</groupId>
+            <artifactId>base</artifactId>
+            <version>1.0</version>
         </dependency>
 
         <dependency>
@@ -40,34 +62,32 @@
             <version>1.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.lonbon.cloud</groupId>
-            <artifactId>base</artifactId>
-            <version>1.0</version>
-        </dependency>
-
-        <!-- easy-query相关依赖 -->
-        <dependency>
-            <groupId>com.easy-query</groupId>
-            <artifactId>sql-solon-plugin</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.easy-query</groupId>
-            <artifactId>sql-processor</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.easy-query</groupId>
-            <artifactId>sql-pgsql</artifactId>
-        </dependency>
-
-        <!-- 数据库连接相关 -->
+        <!-- 数据库连接池 -->
         <dependency>
             <groupId>com.zaxxer</groupId>
             <artifactId>HikariCP</artifactId>
         </dependency>
+
+        <!-- postgresql驱动-->
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
+        </dependency>
+
+        <!-- easy-query配合solon框架必须 -->
+        <dependency>
+            <groupId>com.easy-query</groupId>
+            <artifactId>sql-solon-plugin</artifactId>
+        </dependency>
+        <!-- 如果您使用EasyEntityQuery那么需要引入该APT引用 -->
+        <dependency>
+            <groupId>com.easy-query</groupId>
+            <artifactId>sql-processor</artifactId>
+        </dependency>
+        <!-- easy-query的数据库支持 -->
+        <dependency>
+            <groupId>com.easy-query</groupId>
+            <artifactId>sql-pgsql</artifactId>
         </dependency>
     </dependencies>
 

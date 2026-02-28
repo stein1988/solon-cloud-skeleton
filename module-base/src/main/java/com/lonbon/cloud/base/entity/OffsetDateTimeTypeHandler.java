@@ -4,8 +4,9 @@ import com.easy.query.core.basic.jdbc.executor.internal.merge.result.StreamResul
 import com.easy.query.core.basic.jdbc.executor.internal.props.JdbcProperty;
 import com.easy.query.core.basic.jdbc.types.EasyParameter;
 import com.easy.query.core.basic.jdbc.types.handler.JdbcTypeHandler;
-import lombok.extern.slf4j.Slf4j;
 import org.noear.solon.annotation.Component;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -20,9 +21,11 @@ import java.util.Set;
  * PostgreSQL timestamptz 类型与 Java OffsetDateTime 类型的处理器
  * TODO：其他类型数据库的带时区时间戳字段测试
  */
-@Slf4j
+
 @Component
 public class OffsetDateTimeTypeHandler implements JdbcTypeHandler {
+
+//    private static final Logger log = LoggerFactory.getLogger(OffsetDateTimeTypeHandler.class);
 
     public static final OffsetDateTimeTypeHandler INSTANCE = new OffsetDateTimeTypeHandler();
 
@@ -34,9 +37,9 @@ public class OffsetDateTimeTypeHandler implements JdbcTypeHandler {
         }
         // 将 Timestamp 转换为 OffsetDateTime
         LocalDateTime localDateTime = timestamp.toLocalDateTime();
-        log.info("localDateTime={}", localDateTime);
+//        log.info("localDateTime={}", localDateTime);
         OffsetDateTime offsetDateTime = timestamp.toInstant().atOffset(ZoneOffset.UTC);
-        log.info("offsetDateTime={}", offsetDateTime);
+//        log.info("offsetDateTime={}", offsetDateTime);
 
         return offsetDateTime;
     }
