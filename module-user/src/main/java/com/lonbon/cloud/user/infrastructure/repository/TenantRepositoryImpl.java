@@ -1,10 +1,13 @@
 package com.lonbon.cloud.user.infrastructure.repository;
 
 import com.easy.query.api.proxy.client.EasyEntityQuery;
+import com.easy.query.solon.annotation.Db;
 import com.lonbon.cloud.user.domain.entity.Tenant;
 import com.lonbon.cloud.user.domain.repository.TenantRepository;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 import java.util.Optional;
@@ -13,16 +16,17 @@ import java.util.UUID;
 @Component
 public class TenantRepositoryImpl implements TenantRepository {
 
-    @Inject
+    private static final Logger log = LoggerFactory.getLogger(TenantRepositoryImpl.class);
+
+    @Db("db_master")
     private EasyEntityQuery easyEntityQuery;
 
     @Override
     public Tenant save(Tenant tenant) {
-        if (tenant.getId() == null) {
-            easyEntityQuery.insertable(tenant);
-        } else {
-            easyEntityQuery.updatable(tenant);
-        }
+        log.info("Saving tenant {}", tenant);
+        tenant.setCreatedBy(UUID.randomUUID());
+        long rows = easyEntityQuery.insertable(tenant).executeRows();
+        log.info("rows : {}", rows);
         return tenant;
     }
 

@@ -1,6 +1,7 @@
 package com.lonbon.cloud.user.infrastructure.repository;
 
 import com.easy.query.api.proxy.client.EasyEntityQuery;
+import com.easy.query.solon.annotation.Db;
 import com.lonbon.cloud.user.domain.entity.Team;
 import com.lonbon.cloud.user.domain.repository.TeamRepository;
 import org.noear.solon.annotation.Component;
@@ -13,7 +14,7 @@ import java.util.UUID;
 @Component
 public class TeamRepositoryImpl implements TeamRepository {
 
-    @Inject
+    @Db("db_master")
     private EasyEntityQuery easyEntityQuery;
 
     @Override

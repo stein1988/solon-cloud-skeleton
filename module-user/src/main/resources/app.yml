@@ -14,10 +14,10 @@ solon.logging:
 solon.dataSources:
   db_master!:
     class: "com.zaxxer.hikari.HikariDataSource" #数据源类
-    # PostgreSQL JDBC URL（注意格式：jdbc:postgresql://地址:端口/库名）
-    jdbcUrl: jdbc:postgresql://192.168.9.230:5432/solon_demo?useUnicode=true&characterEncoding=utf8&ssl=false
     # 驱动类名（PostgreSQL 42.x 版本可省略，Solon 会自动识别）
     driverClassName: org.postgresql.Driver
+    # PostgreSQL JDBC URL（注意格式：jdbc:postgresql://地址:端口/库名）
+    jdbcUrl: jdbc:postgresql://192.168.9.230:5432/solon_demo?useUnicode=true&characterEncoding=utf8&ssl=false
     # 数据库账号密码
     username: solon
     password: solon@dev_2026

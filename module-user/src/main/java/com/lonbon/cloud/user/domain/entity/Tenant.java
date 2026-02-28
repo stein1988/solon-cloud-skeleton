@@ -10,7 +10,7 @@ import lombok.EqualsAndHashCode;
 
 @Data
 @EqualsAndHashCode(callSuper = true)
-@Table("lb_tenant")
+@Table("sys_tenant")
 @EntityProxy
 public class Tenant extends BaseEntity implements ProxyEntityAvailable<Tenant , TenantProxy> {
     private String name;

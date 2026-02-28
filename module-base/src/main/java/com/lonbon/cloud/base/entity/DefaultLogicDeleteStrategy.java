@@ -23,7 +23,7 @@ public class DefaultLogicDeleteStrategy extends AbstractLogicDeleteStrategy {
 
     @Override
     public Set<Class<?>> allowedPropertyTypes() {
-        return Set.of(Boolean.class);
+        return Set.of(boolean.class);
     }
 
     /**

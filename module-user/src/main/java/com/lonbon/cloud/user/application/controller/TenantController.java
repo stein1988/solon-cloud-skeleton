@@ -90,6 +90,9 @@ public class TenantController {
     @Mapping
     public Response<List<Tenant>> getAllTenants() {
         try {
+            Tenant newTenant = new Tenant();
+            newTenant.setName("测试租户");
+            tenantService.createTenant(newTenant);
             List<Tenant> tenants = tenantService.getAllTenants();
             return Response.success(tenants);
         } catch (Exception e) {
