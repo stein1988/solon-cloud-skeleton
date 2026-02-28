@@ -12,18 +12,12 @@
 
     <groupId>com.lonbon.cloud</groupId>
     <artifactId>common</artifactId>
-    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>module-common</name>
     <description>公共模块，包含工具类、通用配置等</description>
 
     <dependencies>
-        <dependency>
-            <groupId>org.noear</groupId>
-            <artifactId>solon-lib</artifactId>
-        </dependency>
-
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>

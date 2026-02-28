@@ -12,7 +12,6 @@
 
     <groupId>com.lonbon.cloud</groupId>
     <artifactId>base</artifactId>
-    <version>1.0</version>
     <packaging>jar</packaging>
 
     <name>module-base</name>
@@ -37,6 +36,12 @@
         <dependency>
             <groupId>com.easy-query</groupId>
             <artifactId>sql-processor</artifactId>
+        </dependency>
+
+        <!-- UUID v7 生成 -->
+        <dependency>
+            <groupId>com.github.f4b6a3</groupId>
+            <artifactId>uuid-creator</artifactId>
         </dependency>
     </dependencies>
 
