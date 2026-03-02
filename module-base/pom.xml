@@ -25,6 +25,11 @@
 
         <dependency>
             <groupId>org.noear</groupId>
+            <artifactId>solon-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.noear</groupId>
             <artifactId>solon-logging-logback</artifactId>
         </dependency>
 

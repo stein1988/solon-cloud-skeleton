@@ -5,17 +5,12 @@ import com.easy.query.core.basic.jdbc.executor.internal.props.JdbcProperty;
 import com.easy.query.core.basic.jdbc.types.EasyParameter;
 import com.easy.query.core.basic.jdbc.types.handler.JdbcTypeHandler;
 import org.noear.solon.annotation.Component;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
-import java.time.LocalDateTime;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * PostgreSQL timestamptz 类型与 Java OffsetDateTime 类型的处理器
@@ -36,12 +31,11 @@ public class OffsetDateTimeTypeHandler implements JdbcTypeHandler {
             return null;
         }
         // 将 Timestamp 转换为 OffsetDateTime
-        LocalDateTime localDateTime = timestamp.toLocalDateTime();
+//        LocalDateTime localDateTime = timestamp.toLocalDateTime();
 //        log.info("localDateTime={}", localDateTime);
-        OffsetDateTime offsetDateTime = timestamp.toInstant().atOffset(ZoneOffset.UTC);
-//        log.info("offsetDateTime={}", offsetDateTime);
+        //        log.info("offsetDateTime={}", offsetDateTime);
 
-        return offsetDateTime;
+        return timestamp.toInstant().atOffset(ZoneOffset.UTC);
     }
 
     @Override

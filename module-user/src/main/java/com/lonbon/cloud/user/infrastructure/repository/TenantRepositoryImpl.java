@@ -24,7 +24,6 @@ public class TenantRepositoryImpl implements TenantRepository {
     @Override
     public Tenant save(Tenant tenant) {
         log.info("Saving tenant {}", tenant);
-        tenant.setCreatedBy(UUID.randomUUID());
         long rows = easyEntityQuery.insertable(tenant).executeRows();
         log.info("rows : {}", rows);
         return tenant;

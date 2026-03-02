@@ -5,7 +5,7 @@ import org.noear.solon.annotation.Import;
 import org.noear.solon.annotation.SolonMain;
 
 @SolonMain
-@Import(scanPackages = "com.lonbon.cloud.user")
+@Import(scanPackages = {"com.lonbon.cloud.user", "com.lonbon.cloud.base"})
 public class App {
     public static void main(String[] args) {
         Solon.start(App.class, args);

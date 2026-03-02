@@ -7,6 +7,7 @@ import com.lonbon.cloud.base.entity.DefaultEntityInterceptor;
 import com.lonbon.cloud.base.entity.DefaultLogicDeleteStrategy;
 import com.lonbon.cloud.base.entity.OffsetDateTimeTypeHandler;
 import com.lonbon.cloud.base.entity.UUIDPrimaryKeyGenerator;
+import org.noear.solon.annotation.Bean;
 import org.noear.solon.annotation.Component;
 
 import java.sql.Timestamp;
@@ -29,4 +30,5 @@ public class BaseAutoConfiguration {
         JdbcTypeHandlerManager jdbcTypeHandlerManager = runtimeContext.getJdbcTypeHandlerManager();
         jdbcTypeHandlerManager.appendHandler(OffsetDateTime.class,OffsetDateTimeTypeHandler.INSTANCE,true);
     }
+
 }

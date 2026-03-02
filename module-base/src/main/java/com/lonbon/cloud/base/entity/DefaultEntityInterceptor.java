@@ -12,6 +12,7 @@ import org.jspecify.annotations.NonNull;
 import org.noear.solon.annotation.Component;
 
 import java.time.OffsetDateTime;
+import java.util.UUID;
 
 @Component
 public class DefaultEntityInterceptor implements EntityInterceptor, UpdateSetInterceptor, UpdateEntityColumnInterceptor {
@@ -47,6 +48,8 @@ public class DefaultEntityInterceptor implements EntityInterceptor, UpdateSetInt
             //,所以这边需要先判断是否登录,未登录就给默认值,不然就获取
             //updateBy同理
 //            baseEntity.setCreateBy(userId);
+            // TODO：获取当前用户id
+            baseEntity.setCreatedBy(UUID.randomUUID());
         }
         if (baseEntity.getUpdatedAt() == null) {
             baseEntity.setUpdatedAt(now);
@@ -54,6 +57,8 @@ public class DefaultEntityInterceptor implements EntityInterceptor, UpdateSetInt
         if (baseEntity.getUpdatedBy() == null) {
 //            String userId = StringUtils.defaultString(currentUser.getUserId());
 //            baseEntity.setUpdateBy(userId);
+            // TODO：获取当前用户id
+            baseEntity.setUpdatedBy(UUID.randomUUID());
         }
     }
 
@@ -66,6 +71,8 @@ public class DefaultEntityInterceptor implements EntityInterceptor, UpdateSetInt
         baseEntity.setUpdatedAt(OffsetDateTime.now());
 //        String userId = StringUtils.defaultString(currentUser.getUserId());
 //        baseEntity.setUpdateBy(userId);
+        // TODO：获取当前用户id
+        baseEntity.setUpdatedBy(UUID.randomUUID());
     }
 
     @Override

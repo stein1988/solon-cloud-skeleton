@@ -3,6 +3,7 @@ package com.lonbon.cloud.user.application.controller;
 import com.lonbon.cloud.common.utils.Response;
 import com.lonbon.cloud.user.domain.entity.Tenant;
 import com.lonbon.cloud.user.domain.service.TenantService;
+import lombok.extern.slf4j.Slf4j;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Delete;
 import org.noear.solon.annotation.Get;
@@ -16,6 +17,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 
+@Slf4j
 @Controller
 @Mapping("/api/tenants")
 public class TenantController {
@@ -90,10 +92,13 @@ public class TenantController {
     @Mapping
     public Response<List<Tenant>> getAllTenants() {
         try {
-            Tenant newTenant = new Tenant();
-            newTenant.setName("测试租户");
-            tenantService.createTenant(newTenant);
+//            Tenant newTenant = new Tenant();
+//            newTenant.setName("测试租户");
+//            tenantService.createTenant(newTenant);
             List<Tenant> tenants = tenantService.getAllTenants();
+            for (Tenant tenant : tenants) {
+                log.info(tenant.toString());
+            }
             return Response.success(tenants);
         } catch (Exception e) {
             return Response.error("Failed to get tenants: " + e.getMessage());
