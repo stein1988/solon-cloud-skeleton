@@ -60,9 +60,9 @@ public class TenantController {
 
     @Get
     @Mapping("/{id}")
-    public Response<Tenant> getTenantById(@Path("id") String id) {
+    public Response<Tenant> getTenantById(@Path("id") UUID id) {
         try {
-            Optional<Tenant> tenant = tenantService.getTenantById(UUID.fromString(id));
+            Optional<Tenant> tenant = tenantService.getTenantById(id);
             if (tenant.isPresent()) {
                 return Response.success(tenant.get());
             } else {

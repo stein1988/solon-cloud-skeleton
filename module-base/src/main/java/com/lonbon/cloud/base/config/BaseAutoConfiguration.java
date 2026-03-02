@@ -7,17 +7,13 @@ import com.lonbon.cloud.base.entity.DefaultEntityInterceptor;
 import com.lonbon.cloud.base.entity.DefaultLogicDeleteStrategy;
 import com.lonbon.cloud.base.entity.OffsetDateTimeTypeHandler;
 import com.lonbon.cloud.base.entity.UUIDPrimaryKeyGenerator;
-import org.noear.solon.annotation.Bean;
-import org.noear.solon.annotation.Component;
 
-import java.sql.Timestamp;
 import java.time.OffsetDateTime;
 
 /**
  * 基础模块自动配置类
  * 用于扫描 base 模块的组件，使其能被上层模块自动注入
  */
-@Component
 public class BaseAutoConfiguration {
 
     public static void applyQueryConfiguration(QueryConfiguration configuration) {
@@ -30,5 +26,4 @@ public class BaseAutoConfiguration {
         JdbcTypeHandlerManager jdbcTypeHandlerManager = runtimeContext.getJdbcTypeHandlerManager();
         jdbcTypeHandlerManager.appendHandler(OffsetDateTime.class,OffsetDateTimeTypeHandler.INSTANCE,true);
     }
-
 }

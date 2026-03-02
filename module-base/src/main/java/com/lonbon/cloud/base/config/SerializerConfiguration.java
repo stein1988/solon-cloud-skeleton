@@ -10,7 +10,6 @@ import java.time.format.DateTimeFormatter;
 @Component
 public class SerializerConfiguration {
 
-
     @Bean
     public void config(Snack4StringSerializer serializer) {
         serializer.addEncoder(OffsetDateTime.class, s -> s.format(DateTimeFormatter.ISO_OFFSET_DATE_TIME));
