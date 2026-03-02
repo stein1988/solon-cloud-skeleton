@@ -34,6 +34,7 @@
         <HikariCP.verison>7.0.2</HikariCP.verison>
         <postgresql.version>42.7.9</postgresql.version>
         <uuid-creator.version>6.1.1</uuid-creator.version>
+        <sa-token-solon-plugin.version>1.44.0</sa-token-solon-plugin.version>
     </properties>
 
     <dependencyManagement>
@@ -121,6 +122,13 @@
                 <groupId>com.github.f4b6a3</groupId>
                 <artifactId>uuid-creator</artifactId>
                 <version>${uuid-creator.version}</version>
+            </dependency>
+
+            <!-- sa-token 集成 -->
+            <dependency>
+                <groupId>cn.dev33</groupId>
+                <artifactId>sa-token-solon-plugin</artifactId>
+                <version>${sa-token-solon-plugin.version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

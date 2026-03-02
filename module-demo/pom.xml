@@ -74,6 +74,11 @@
             <groupId>com.easy-query</groupId>
             <artifactId>sql-pgsql</artifactId>
         </dependency>
+
+        <dependency>
+            <groupId>cn.dev33</groupId>
+            <artifactId>sa-token-solon-plugin</artifactId>
+        </dependency>
     </dependencies>
 
     <build>
