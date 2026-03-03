@@ -71,4 +71,32 @@ solon.resource:
    - 确保安全框架（如 Shiro、Spring Security 等）不会拦截这些路径
    - 如果使用了安全框架，需要在安全配置中放行这些路径
 
+## 最终解决方案
+
+查看官方文档，发现需要在配置中增加solon.docs相关配置
+
+   ```yaml
+   solon.docs:
+   routes:
+      - id: userApi
+         groupName: "user服务接口"
+         info:
+         title: "在线文档"
+         description: "在线API文档"
+         termsOfService: "https://gitee.com/noear/solon"
+         contact:
+            name: "demo"
+            url: "https://gitee.com/noear/solon"
+            email: "demo@foxmail.com"
+         version: "1.0"
+         schemes:
+         - "HTTP"
+         - "HTTPS"
+         globalResponseInData: true
+         globalResult: "com.lonbon.cloud.common.utils.Response"
+         apis:
+         - basePackage: "com.lonbon.cloud.user"
+   ```
+
+文档链接：[solon 官方文档-教程-Solon Docs 开发-文档摘要的配置与构建](https://solon.noear.org/article/796)
 

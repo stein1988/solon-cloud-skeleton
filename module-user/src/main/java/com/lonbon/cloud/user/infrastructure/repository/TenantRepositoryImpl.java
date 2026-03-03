@@ -31,12 +31,12 @@ public class TenantRepositoryImpl implements TenantRepository {
 
     @Override
     public void delete(UUID id) {
-        easyEntityQuery.deletable(Tenant.class).where(o -> o.id().eq(id));
+        easyEntityQuery.deletable(Tenant.class).ignoreVersion().where(o -> o.id().eq(id)).executeRows();
     }
 
     @Override
     public Optional<Tenant> findById(UUID id) {
-        Tenant tenant = easyEntityQuery.queryable(Tenant.class).where(o -> o.id().eq(id)).firstOrNull();
+        Tenant tenant = easyEntityQuery.queryable(Tenant.class).whereById(id).firstOrNull();
         return Optional.ofNullable(tenant);
     }
 

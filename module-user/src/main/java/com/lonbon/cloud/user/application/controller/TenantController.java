@@ -3,6 +3,8 @@ package com.lonbon.cloud.user.application.controller;
 import com.lonbon.cloud.common.utils.Response;
 import com.lonbon.cloud.user.domain.entity.Tenant;
 import com.lonbon.cloud.user.domain.service.TenantService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.noear.solon.annotation.Controller;
 import org.noear.solon.annotation.Delete;
@@ -18,6 +20,7 @@ import java.util.Optional;
 import java.util.UUID;
 
 @Slf4j
+@Tag(name = "租户")
 @Controller
 @Mapping("/api/tenants")
 public class TenantController {
@@ -25,6 +28,7 @@ public class TenantController {
     @Inject
     private TenantService tenantService;
 
+    @Operation(summary = "创建")
     @Post
     @Mapping
     public Response<Tenant> createTenant(Tenant tenant) {
@@ -36,6 +40,7 @@ public class TenantController {
         }
     }
 
+    @Operation(summary = "更新")
     @Put
     @Mapping
     public Response<Tenant> updateTenant(Tenant tenant) {
@@ -47,47 +52,39 @@ public class TenantController {
         }
     }
 
+    @Operation(summary = "删除")
     @Delete
     @Mapping("/{id}")
-    public Response<Void> deleteTenant(@Path("id") String id) {
-        try {
-            tenantService.deleteTenant(UUID.fromString(id));
-            return Response.success(null, "Tenant deleted successfully");
-        } catch (Exception e) {
-            return Response.error("Failed to delete tenant: " + e.getMessage());
-        }
+    public Response<Void> deleteTenant(@Path("id") UUID id) {
+        tenantService.deleteTenant(id);
+        return Response.success(null, "Tenant deleted successfully");
     }
 
+    @Operation(summary = "查询单个（根据ID）")
     @Get
     @Mapping("/{id}")
     public Response<Tenant> getTenantById(@Path("id") UUID id) {
         try {
             Optional<Tenant> tenant = tenantService.getTenantById(id);
-            if (tenant.isPresent()) {
-                return Response.success(tenant.get());
-            } else {
-                return Response.error("Tenant not found");
-            }
+            return tenant.map(Response::success).orElseGet(() -> Response.error("Tenant not found"));
         } catch (Exception e) {
             return Response.error("Failed to get tenant: " + e.getMessage());
         }
     }
 
+    @Operation(summary = "查询单个（根据名称）")
     @Get
     @Mapping("/name/{name}")
     public Response<Tenant> getTenantByName(@Path("name") String name) {
         try {
             Optional<Tenant> tenant = tenantService.getTenantByName(name);
-            if (tenant.isPresent()) {
-                return Response.success(tenant.get());
-            } else {
-                return Response.error("Tenant not found");
-            }
+            return tenant.map(Response::success).orElseGet(() -> Response.error("Tenant not found"));
         } catch (Exception e) {
             return Response.error("Failed to get tenant: " + e.getMessage());
         }
     }
 
+    @Operation(summary = "查询所有")
     @Get
     @Mapping
     public Response<List<Tenant>> getAllTenants() {
@@ -110,11 +107,7 @@ public class TenantController {
     public Response<Tenant> getDefaultTenant() {
         try {
             Optional<Tenant> tenant = tenantService.getDefaultTenant();
-            if (tenant.isPresent()) {
-                return Response.success(tenant.get());
-            } else {
-                return Response.error("Default tenant not found");
-            }
+            return tenant.map(Response::success).orElseGet(() -> Response.error("Default tenant not found"));
         } catch (Exception e) {
             return Response.error("Failed to get default tenant: " + e.getMessage());
         }

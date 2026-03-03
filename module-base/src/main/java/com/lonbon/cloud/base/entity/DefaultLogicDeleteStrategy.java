@@ -11,6 +11,7 @@ import org.noear.solon.annotation.Component;
 
 import java.time.OffsetDateTime;
 import java.util.Set;
+import java.util.UUID;
 
 @Component
 @RequiredArgsConstructor
@@ -39,7 +40,8 @@ public class DefaultLogicDeleteStrategy extends AbstractLogicDeleteStrategy {
      */
     @Override
     protected SQLActionExpression1<ColumnSetter<Object>> getDeletedSQLExpression(LogicDeleteBuilder builder, String propertyName) {
-        return o->o.set(propertyName, true).set("deleteTime", OffsetDateTime.now());
+        // TODO: deletedBy改成sa-token获取的当前用户id
+        return o->o.set(propertyName, true).set("deletedBy", UUID.randomUUID()).set("deletedAt", OffsetDateTime.now());
     }
 
 
