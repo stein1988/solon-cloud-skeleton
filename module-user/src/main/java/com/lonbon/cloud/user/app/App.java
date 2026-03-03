@@ -10,7 +10,7 @@ import org.noear.solon.annotation.SolonMain;
 public class App {
     public static void main(String[] args) {
         Solon.start(App.class, args, app->{
-            app.converters().register(new UUIDConverter()); //v3.6.0 之前使用 converterManager
+            app.converters().register(new UUIDConverter()); 
         });
     }
 }
