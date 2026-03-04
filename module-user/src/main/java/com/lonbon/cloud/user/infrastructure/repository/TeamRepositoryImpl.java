@@ -14,7 +14,7 @@ import java.util.UUID;
 @Component
 public class TeamRepositoryImpl implements TeamRepository {
 
-    @Db("db_master")
+    @Db
     private EasyEntityQuery easyEntityQuery;
 
     @Override

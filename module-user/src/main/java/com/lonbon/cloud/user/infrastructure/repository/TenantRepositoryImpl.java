@@ -18,7 +18,7 @@ public class TenantRepositoryImpl implements TenantRepository {
 
     private static final Logger log = LoggerFactory.getLogger(TenantRepositoryImpl.class);
 
-    @Db("db_master")
+    @Db
     private EasyEntityQuery easyEntityQuery;
 
     @Override
@@ -31,7 +31,7 @@ public class TenantRepositoryImpl implements TenantRepository {
 
     @Override
     public void delete(UUID id) {
-        easyEntityQuery.deletable(Tenant.class).ignoreVersion().where(o -> o.id().eq(id)).executeRows();
+        easyEntityQuery.deletable(Tenant.class).where(o -> o.id().eq(id)).executeRows();
     }
 
     @Override

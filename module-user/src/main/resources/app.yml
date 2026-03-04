@@ -34,7 +34,7 @@ solon.docs:
           # .application.controller
 
 solon.dataSources:
-  db_master!:
+  db_default!:
     class: "com.zaxxer.hikari.HikariDataSource" #数据源类
     # 驱动类名（PostgreSQL 42.x 版本可省略，Solon 会自动识别）
     driverClassName: org.postgresql.Driver
@@ -58,7 +58,7 @@ solon.dataSources:
       test-on-borrow: false        # 借用连接时不检测（提升性能，靠 idle 检测即可
 
 # 配置数据源对应的 easy-query 信息（要与 DataSource bean 的名字对上）
-easy-query.db_master:
+easy-query.db_default:
   name-conversion: underlined
   database: pgsql
   print-sql: true

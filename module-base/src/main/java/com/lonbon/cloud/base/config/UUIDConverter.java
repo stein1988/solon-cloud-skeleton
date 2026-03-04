@@ -1,5 +1,6 @@
 package com.lonbon.cloud.base.config;
 
+import org.noear.solon.annotation.Component;
 import org.noear.solon.core.convert.Converter;
 import org.noear.solon.core.exception.ConvertException;
 
@@ -15,7 +16,7 @@ import java.util.UUID;
  *      });
  * 参靠：https://solon.noear.org/article/567  定制 Converter 处理特别类型转换
  */
-//@Component 
+@Component
 public class UUIDConverter implements Converter<String, UUID> {
 
     @Override

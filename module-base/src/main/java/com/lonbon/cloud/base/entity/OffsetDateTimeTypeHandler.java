@@ -4,6 +4,7 @@ import com.easy.query.core.basic.jdbc.executor.internal.merge.result.StreamResul
 import com.easy.query.core.basic.jdbc.executor.internal.props.JdbcProperty;
 import com.easy.query.core.basic.jdbc.types.EasyParameter;
 import com.easy.query.core.basic.jdbc.types.handler.JdbcTypeHandler;
+import org.jspecify.annotations.NonNull;
 import org.noear.solon.annotation.Component;
 
 import java.sql.SQLException;
@@ -18,11 +19,16 @@ import java.time.ZoneOffset;
  */
 
 @Component
-public class OffsetDateTimeTypeHandler implements JdbcTypeHandler {
+public class OffsetDateTimeTypeHandler implements JdbcTypeHandlerConfigurer {
 
 //    private static final Logger log = LoggerFactory.getLogger(OffsetDateTimeTypeHandler.class);
 
-    public static final OffsetDateTimeTypeHandler INSTANCE = new OffsetDateTimeTypeHandler();
+//    public static final OffsetDateTimeTypeHandler INSTANCE = new OffsetDateTimeTypeHandler();
+
+    @Override
+    public @NonNull Class<?> getType() {
+        return OffsetDateTime.class;
+    }
 
     @Override
     public Object getValue(JdbcProperty jdbcProperty, StreamResultSet streamResultSet) throws SQLException {
@@ -49,4 +55,6 @@ public class OffsetDateTimeTypeHandler implements JdbcTypeHandler {
             parameter.getPs().setTimestamp(parameter.getIndex(), timestamp);
         }
     }
+
+
 }

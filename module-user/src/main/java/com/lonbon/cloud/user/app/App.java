@@ -9,12 +9,10 @@ import org.noear.solon.annotation.SolonMain;
 import org.noear.solon.docs.DocDocket;
 
 @SolonMain
-@Import(scanPackages = {"com.lonbon.cloud.user", "com.lonbon.cloud.base"})
+@Import(scanPackages = {"com.lonbon.cloud.user"})
 public class App {
     public static void main(String[] args) {
-        Solon.start(App.class, args, app->{
-            app.converters().register(new UUIDConverter()); 
-        });
+        Solon.start(App.class, args);
     }
 }
 
