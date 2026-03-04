@@ -98,5 +98,7 @@ solon.resource:
          - basePackage: "com.lonbon.cloud.user"
    ```
 
-文档链接：[solon 官方文档-教程-Solon Docs 开发-文档摘要的配置与构建](https://solon.noear.org/article/796)
+## 相关文档
+
+- [solon 官方文档|教程|Solon Docs 开发|文档摘要的配置与构建](https://solon.noear.org/article/796)
 

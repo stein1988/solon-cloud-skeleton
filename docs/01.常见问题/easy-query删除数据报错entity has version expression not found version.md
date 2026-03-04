@@ -63,4 +63,4 @@ easyQuery.deletable(Tenant.class)
 
 ## 相关文档
 
-- [easy-query 官方文档-高级功能-乐观锁版本号](https://www.easy-query.com/easy-query-doc/adv/version.html#%E9%80%BB%E8%BE%91%E5%88%A0%E9%99%A4%E5%8A%A0%E7%89%88%E6%9C%AC%E5%8F%B7)
+- [easy-query 官方文档|高级功能|乐观锁版本号](https://www.easy-query.com/easy-query-doc/adv/version.html#%E9%80%BB%E8%BE%91%E5%88%A0%E9%99%A4%E5%8A%A0%E7%89%88%E6%9C%AC%E5%8F%B7)

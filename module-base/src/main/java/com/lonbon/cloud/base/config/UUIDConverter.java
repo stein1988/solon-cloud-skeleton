@@ -9,11 +9,13 @@ import java.util.UUID;
 /**
  * UUID 转换器，用于接收请求时，自动将字符串转换为 UUID 类型
  * 注意：
- * 1. 这里不能使用 @Component 注解自动注入，否则easy-query框架自动生成的实体类会缺少id字段的相关函数，原因未知，
+ * 1. 这里不能使用@Import(scanPackages = {"com.lonbon.cloud.base"})的方式自动注入，否则easy-query框架自动生成的实体类会缺少id字段的相关函数，原因未知，
  * 因此，需要手动注册到 Solon 容器中
  *      Solon.start(App.class, args, app->{
  *          app.converters().register(new UUIDConverter()); 
  *      });
+ * 或者在插件中注册
+ *      context.beanMake(UUIDConverter.class);
  * 参靠：https://solon.noear.org/article/567  定制 Converter 处理特别类型转换
  */
 @Component
