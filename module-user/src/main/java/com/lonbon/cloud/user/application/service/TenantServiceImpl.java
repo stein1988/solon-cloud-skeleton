@@ -29,7 +29,7 @@ public class TenantServiceImpl implements TenantService {
 
     @Override
     public void deleteTenant(UUID id) {
-        tenantRepository.delete(id);
+        tenantRepository.deleteById(id);
     }
 
     @Override
@@ -39,26 +39,28 @@ public class TenantServiceImpl implements TenantService {
 
     @Override
     public Optional<Tenant> getTenantByName(String name) {
-        return tenantRepository.findByName(name);
+//        return tenantRepository.findByName(name);
+        return Optional.empty();
     }
 
     @Override
     public List<Tenant> getAllTenants() {
-        return tenantRepository.findAll();
+        return (List<Tenant>) tenantRepository.findAll();
     }
 
     @Override
     public Optional<Tenant> getDefaultTenant() {
-        return tenantRepository.findDefaultTenant();
+//        return tenantRepository.findDefaultTenant();
+        return Optional.empty();
     }
 
     @Override
     public void setDefaultTenant(UUID tenantId) {
-        // 先将所有租户的isDefault设置为false
-        List<Tenant> tenants = tenantRepository.findAll();
-        for (Tenant tenant : tenants) {
-            tenant.setDefault(tenant.getId().equals(tenantId));
-            tenantRepository.save(tenant);
-        }
+//        // 先将所有租户的isDefault设置为false
+//        List<Tenant> tenants = tenantRepository.findAll();
+//        for (Tenant tenant : tenants) {
+//            tenant.setDefault(tenant.getId().equals(tenantId));
+//            tenantRepository.save(tenant);
+//        }
     }
 }
