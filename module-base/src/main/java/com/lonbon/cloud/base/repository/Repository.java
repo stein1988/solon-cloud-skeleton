@@ -1,158 +1,174 @@
 package com.lonbon.cloud.base.repository;
 
+import com.easy.query.core.expression.lambda.SQLActionExpression1;
+
+import java.util.Collection;
 import java.util.Optional;
 
-public interface Repository<E, ID> {
+/**
+ * 仓库接口，定义了对实体的基本操作方法
+ * @param <TProxy> 实体代理类型
+ * @param <T> 实体类型
+ * @param <ID> 主键类型
+ */
+public interface Repository<TProxy, T, ID> {
     /**
-     * Saves a given entity. Use the returned instance for further operations as the save operation might have changed the
-     * entity instance completely.
+     * 直接插入给定的实体。
      *
-     * @param entity the entity to save, must not be {@literal null}.
-     * @return the saved entity.
-     * @throws IllegalArgumentException in case the given {@literal entity} is {@literal null}.
-     * @throws OptimisticLockingFailureException when the entity uses optimistic locking and has a version attribute with
-     *           a different value from that found in the persistence store. Also thrown if the entity is assumed to be
-     *           present but does not exist in the database.
+     * @param entity 要插入的实体，不能为 {@literal null}。
+     * @return 插入后的实体。
+     * @throws IllegalArgumentException 如果给定的 {@literal entity} 为 {@literal null}。
      */
-    <S extends E> S save(S entity);
+    <S extends T> S insert(S entity);
 
     /**
-     * Saves all given entities.
+     * 保存给定的实体。使用返回的实例进行进一步操作，因为保存操作可能完全改变了实体实例。
      *
-     * @param entities must not be {@literal null} nor must it contain {@literal null}.
-     * @return the saved entities. The returned {@literal Iterable} will have the same size as the {@literal Iterable}
-     *         passed as an argument.
-     * @throws IllegalArgumentException in case the given {@link Iterable entities} or one of its entities is
-     *           {@literal null}.
-     * @throws OptimisticLockingFailureException when at least one entity uses optimistic locking and has a version
-     *           attribute with a different value from that found in the persistence store. Also thrown if at least one
-     *           entity is assumed to be present but does not exist in the database.
+     * @param entity 要保存的实体，不能为 {@literal null}。
+     * @return 保存后的实体。
+     * @throws IllegalArgumentException 如果给定的 {@literal entity} 为 {@literal null}。
+     * @throws OptimisticLockingFailureException 当实体使用乐观锁并且版本属性与持久化存储中的值不同时。
+     *                                          当实体被认为存在但数据库中不存在时也会抛出。
      */
-    <S extends E> Iterable<S> saveAll(Iterable<S> entities);
+    <S extends T> S save(S entity);
 
     /**
-     * Retrieves an entity by its id.
+     * 保存所有给定的实体。
      *
-     * @param id must not be {@literal null}.
-     * @return the entity with the given id or {@literal Optional#empty()} if none found.
-     * @throws IllegalArgumentException if {@literal id} is {@literal null}.
+     * @param entities 不能为 {@literal null}，也不能包含 {@literal null}。
+     * @return 保存后的实体。返回的 {@literal Iterable} 将与传递的参数大小相同。
+     * @throws IllegalArgumentException 如果给定的 {@link Iterable entities} 或其中一个实体为 {@literal null}。
+     * @throws OptimisticLockingFailureException 当至少一个实体使用乐观锁并且版本属性与持久化存储中的值不同时。
+     *                                          当至少一个实体被认为存在但数据库中不存在时也会抛出。
      */
-    Optional<E> findById(ID id);
+    <S extends T> Iterable<S> saveAll(Iterable<S> entities);
 
     /**
-     * Returns whether an entity with the given id exists.
+     * 通过 ID 检索实体。
      *
-     * @param id must not be {@literal null}.
-     * @return {@literal true} if an entity with the given id exists, {@literal false} otherwise.
-     * @throws IllegalArgumentException if {@literal id} is {@literal null}.
+     * @param id 不能为 {@literal null}。
+     * @return 具有给定 ID 的实体，或如果未找到则返回 {@literal Optional#empty()}。
+     * @throws IllegalArgumentException 如果 {@literal id} 为 {@literal null}。
+     */
+    Optional<T> findById(ID id);
+
+    /**
+     * 返回是否存在具有给定 ID 的实体。
+     *
+     * @param id 不能为 {@literal null}。
+     * @return 如果存在具有给定 ID 的实体则为 {@literal true}，否则为 {@literal false}。
+     * @throws IllegalArgumentException 如果 {@literal id} 为 {@literal null}。
      */
     boolean existsById(ID id);
 
     /**
-     * Returns all instances of the type.
+     * 返回所有该类型的实例。
      *
-     * @return all entities
+     * @return 所有实体
      */
-    Iterable<E> findAll();
+    Iterable<T> findAll();
 
     /**
-     * Returns all instances of the type {@code T} with the given IDs.
+     * 返回具有给定 ID 的所有类型 {@code T} 的实例。
      * <p>
-     * If some or all ids are not found, no entities are returned for these IDs.
+     * 如果某些或所有 ID 未找到，则不会为这些 ID 返回实体。
      * <p>
-     * Note that the order of elements in the result is not guaranteed.
+     * 请注意，结果中元素的顺序不保证。
      *
-     * @param ids must not be {@literal null} nor contain any {@literal null} values.
-     * @return iterable of found entities. The size can be equal or less than the number of given {@literal ids}.
-     * @throws IllegalArgumentException in case the given {@link Iterable ids} or one of its items is {@literal null}.
+     * @param ids 不能为 {@literal null}，也不能包含任何 {@literal null} 值。
+     * @return 找到的实体的可迭代对象。大小可以等于或小于给定 {@literal ids} 的数量。
+     * @throws IllegalArgumentException 如果给定的 {@link Iterable ids} 或其中一个项为 {@literal null}。
      */
-//    Iterable<E> findAllById(Iterable<ID> ids);
+    Iterable<T> findAllById(Collection<ID> ids);
 
     /**
-     * Returns all entities sorted by the given options.
+     * 根据条件查询所有实体
      *
-     * @param sort the {@link Sort} specification to sort the results by, can be {@link Sort#unsorted()}, must not be
-     *          {@literal null}.
-     * @return all entities sorted by the given options
+     * @param whereExpression 查询条件表达式
+     * @return 符合条件的实体列表
+     */
+    Iterable<T> findAll(SQLActionExpression1<TProxy> whereExpression);
+
+    /**
+     * 根据条件查询所有实体（条件可控）
+     *
+     * @param condition 是否应用条件
+     * @param whereExpression 查询条件表达式
+     * @return 符合条件的实体列表
+     */
+    Iterable<T> findAll(boolean condition, SQLActionExpression1<TProxy> whereExpression);
+
+    /**
+     * 返回按给定选项排序的所有实体。
+     *
+     * @param sort 排序规范，不能为空
+     * @return 按给定选项排序的所有实体
      */
     // TODO: Sort待实现
 //    Iterable<T> findAll(Sort sort);
 
     /**
-     * Returns a {@link Page} of entities meeting the paging restriction provided in the {@link Pageable} object.
+     * 返回符合 {@link Pageable} 对象中提供的分页限制的实体 {@link Page}。
      *
-     * @param pageable the pageable to request a paged result, can be {@link Pageable#unpaged()}, must not be
-     *          {@literal null}.
-     * @return a page of entities
+     * @param pageable 分页请求，不能为空
+     * @return 实体页
      */
     // TODO: Page、Pageable待实现
 //    Page<T> findAll(Pageable pageable);
 
     /**
-     * Returns the number of entities available.
+     * 返回可用实体的数量。
      *
-     * @return the number of entities.
+     * @return 实体的数量。
      */
     long count();
 
     /**
-     * Deletes the entity with the given id.
+     * 删除给定的实体。
+     *
+     * @param entity 不能为 {@literal null}。
+     * @throws IllegalArgumentException 如果给定的实体为 {@literal null}。
+     * @throws OptimisticLockingFailureException 当实体使用乐观锁并且版本属性与持久化存储中的值不同时。
+     *                                          当实体被认为存在但数据库中不存在时也会抛出。
+     */
+    void delete(T entity);
+
+    /**
+     * 删除具有给定 ID 的实体。
      * <p>
-     * If the entity is not found in the persistence store it is silently ignored.
+     * 如果在持久化存储中未找到实体，则静默忽略。
      *
-     * @param id must not be {@literal null}.
-     * @throws IllegalArgumentException in case the given {@literal id} is {@literal null}
-     * @throws OptimisticLockingFailureException when the entity uses optimistic locking and has a version attribute with
-     *           a different value from that found in the persistence store. Also thrown if the entity is assumed to be
-     *           present but does not exist in the database.
+     * @param id 不能为 {@literal null}。
+     * @throws IllegalArgumentException 如果给定的 {@literal id} 为 {@literal null}
+     * @throws OptimisticLockingFailureException 当实体使用乐观锁并且版本属性与持久化存储中的值不同时。
+     *                                          当实体被认为存在但数据库中不存在时也会抛出。
      */
-    default void deleteById(ID id) {
-        Optional<E> entity = findById(id);
-        if (entity.isPresent()) {
-            delete(entity.get());
-        } else {
-            throw new IllegalArgumentException("Entity not found with id: " + id);
-        }
-    }
+    void deleteById(ID id);
 
     /**
-     * Deletes a given entity.
+     * 删除给定的实体。
      *
-     * @param entity must not be {@literal null}.
-     * @throws IllegalArgumentException in case the given entity is {@literal null}.
-     * @throws OptimisticLockingFailureException when the entity uses optimistic locking and has a version attribute with
-     *           a different value from that found in the persistence store. Also thrown if the entity is assumed to be
-     *           present but does not exist in the database.
+     * @param entities 不能为 {@literal null}。不能包含 {@literal null} 元素。
+     * @throws IllegalArgumentException 如果给定的 {@literal entities} 或其中一个实体为 {@literal null}。
+     * @throws OptimisticLockingFailureException 当至少一个实体使用乐观锁并且版本属性与持久化存储中的值不同时。
+     *                                          当至少一个实体被认为存在但数据库中不存在时也会抛出。
      */
-    void delete(E entity);
+    void deleteAll(Iterable<? extends T> entities);
 
     /**
-     * Deletes all instances of the type {@code T} with the given IDs.
-     * <p>
-     * Entities that aren't found in the persistence store are silently ignored.
-     *
-     * @param ids must not be {@literal null}. Must not contain {@literal null} elements.
-     * @throws IllegalArgumentException in case the given {@literal ids} or one of its elements is {@literal null}.
-     * @throws OptimisticLockingFailureException when the entity uses optimistic locking and has a version attribute with
-     *           a different value from that found in the persistence store. Also thrown if the entity is assumed to be
-     *           present but does not exist in the database.
-     * @since 2.5
-     */
-    void deleteAllById(Iterable<? extends ID> ids);
-
-    /**
-     * Deletes the given entities.
-     *
-     * @param entities must not be {@literal null}. Must not contain {@literal null} elements.
-     * @throws IllegalArgumentException in case the given {@literal entities} or one of its entities is {@literal null}.
-     * @throws OptimisticLockingFailureException when at least one entity uses optimistic locking and has a version
-     *           attribute with a different value from that found in the persistence store. Also thrown if at least one
-     *           entity is assumed to be present but does not exist in the database.
-     */
-    void deleteAll(Iterable<? extends E> entities);
-
-    /**
-     * Deletes all entities managed by the repository.
+     * 删除由仓库管理的所有实体。
      */
     void deleteAll();
+
+    /**
+     * 删除具有给定 ID 的所有类型 {@code T} 的实例。
+     * <p>
+     * 在持久化存储中未找到的实体将被静默忽略。
+     *
+     * @param ids 不能为 {@literal null}。不能包含 {@literal null} 元素。
+     * @throws IllegalArgumentException 如果给定的 {@literal ids} 或其中一个元素为 {@literal null}。
+     * @throws OptimisticLockingFailureException 当实体使用乐观锁并且版本属性与持久化存储中的值不同时。
+     *                                          当实体被认为存在但数据库中不存在时也会抛出。
+     */
+    void deleteAllById(Iterable<? extends ID> ids);
 }
