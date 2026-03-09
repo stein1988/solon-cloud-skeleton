@@ -36,6 +36,16 @@ public class BaseSolonPlugin implements Plugin {
         // 注册 UUID 类型转换器
         context.beanMake(UUIDConverter.class);
 
+        // 注册 Easy-Query 相关组件
+        registerEasyQueryComponents(context);
+    }
+    
+    /**
+     * 注册 Easy-Query 框架相关组件
+     * 
+     * @param context 应用上下文
+     */
+    private void registerEasyQueryComponents(AppContext context) {
         // 注册实体拦截器
         context.beanMake(DefaultEntityInterceptor.class);
         

@@ -20,6 +20,7 @@ import com.easy.query.core.sharding.router.manager.DataSourceRouteManager;
 import com.easy.query.core.sharding.router.manager.TableRouteManager;
 import com.easy.query.solon.annotation.Db;
 import com.lonbon.cloud.base.entity.JdbcTypeHandlerConfigurer;
+
 import org.noear.solon.annotation.Bean;
 import org.noear.solon.annotation.Configuration;
 import org.noear.solon.annotation.Inject;
@@ -28,8 +29,8 @@ import java.util.List;
 
 /**
  * Easy-Query 框架配置类
- * 用于注册和配置 Easy-Query 框架的各种组件
- * 包括拦截器、逻辑删除策略、分片初始化、列加密、版本策略等
+ * 用于注册和配置 Easy-Query 框架的各种组件，这些组件都要提前注册到solon框架的bean容器中
+ * 包括拦截器、逻辑删除策略、分片初始化、列加密、版本策略等，集中存放到{@link com.lonbon.cloud.base.entity}包下
  */
 @Configuration
 public class EasyQueryConfiguration {
