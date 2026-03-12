@@ -1,8 +1,11 @@
 package com.lonbon.cloud.user.application.service;
 
+import com.lonbon.cloud.user.application.dto.TenantDto;
+import com.lonbon.cloud.user.domain.dto.TenantCreateDTO;
 import com.lonbon.cloud.user.domain.entity.Tenant;
 import com.lonbon.cloud.user.domain.repository.TenantRepository;
 import com.lonbon.cloud.user.domain.service.TenantService;
+import io.github.linpeilie.Converter;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 
@@ -17,14 +20,22 @@ public class TenantServiceImpl implements TenantService {
     @Inject
     private TenantRepository tenantRepository;
 
+    @Inject
+    private Converter converter;
+
     @Override
-    public Tenant createTenant(Tenant tenant) {
-        return tenantRepository.save(tenant);
+    public Tenant createTenant(TenantCreateDTO tenant) {
+        Tenant createTenant = converter.convert(tenant,Tenant.class);
+        return tenantRepository.save(createTenant);
     }
 
     @Override
-    public Tenant updateTenant(Tenant tenant) {
-        return tenantRepository.save(tenant);
+    public Tenant updateTenant(TenantDto tenant) {
+        Optional<Tenant> exists = tenantRepository.findById(tenant.getId());
+        if (exists.isPresent()) {
+            Tenant update = converter.convert(tenant, exists.get());
+            return tenantRepository.save(update);
+        } else throw new RuntimeException("not exists");
     }
 
     @Override

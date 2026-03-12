@@ -8,6 +8,8 @@ import com.lonbon.cloud.user.domain.entity.proxy.TenantProxy;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
+import java.util.Map;
+
 @Data
 @EqualsAndHashCode(callSuper = true)
 @Table("sys_tenant")
@@ -18,6 +20,6 @@ public class Tenant extends BaseEntity implements ProxyEntityAvailable<Tenant , 
     private boolean isDefault;
     private boolean isActive;
     private String domain;
-    private String config;
+    private Map<String, Object> config;
     private boolean isSystem;
 }

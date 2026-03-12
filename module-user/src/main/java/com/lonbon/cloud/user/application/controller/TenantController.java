@@ -1,19 +1,15 @@
 package com.lonbon.cloud.user.application.controller;
 
 import com.lonbon.cloud.common.utils.Response;
+import com.lonbon.cloud.user.application.dto.TenantDto;
+import com.lonbon.cloud.user.domain.dto.TenantCreateDTO;
 import com.lonbon.cloud.user.domain.entity.Tenant;
 import com.lonbon.cloud.user.domain.service.TenantService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
-import org.noear.solon.annotation.Controller;
-import org.noear.solon.annotation.Delete;
-import org.noear.solon.annotation.Get;
-import org.noear.solon.annotation.Inject;
-import org.noear.solon.annotation.Mapping;
-import org.noear.solon.annotation.Post;
-import org.noear.solon.annotation.Put;
-import org.noear.solon.annotation.Path;
+import org.noear.solon.annotation.*;
+import org.noear.solon.validation.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
@@ -21,6 +17,7 @@ import java.util.UUID;
 
 @Slf4j
 @Tag(name = "租户")
+@Valid
 @Controller
 @Mapping("/api/tenants")
 public class TenantController {
@@ -31,10 +28,10 @@ public class TenantController {
     @Operation(summary = "创建")
     @Post
     @Mapping
-    public Response<Tenant> createTenant(Tenant tenant) {
+    public Response<UUID> createTenant(@Body @Validated TenantCreateDTO tenant) {
         try {
             Tenant createdTenant = tenantService.createTenant(tenant);
-            return Response.success(createdTenant, "Tenant created successfully");
+            return Response.success(createdTenant.getId(), "Tenant created successfully");
         } catch (Exception e) {
             return Response.error("Failed to create tenant: " + e.getMessage());
         }
@@ -43,7 +40,7 @@ public class TenantController {
     @Operation(summary = "更新")
     @Put
     @Mapping
-    public Response<Tenant> updateTenant(Tenant tenant) {
+    public Response<Tenant> updateTenant(TenantDto tenant) {
         try {
             Tenant updatedTenant = tenantService.updateTenant(tenant);
             return Response.success(updatedTenant, "Tenant updated successfully");

@@ -40,6 +40,11 @@
         </dependency>
 
         <dependency>
+            <groupId>org.noear</groupId>
+            <artifactId>solon-security-validation</artifactId>
+        </dependency>
+
+        <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
         </dependency>
@@ -88,6 +93,11 @@
         <dependency>
             <groupId>com.easy-query</groupId>
             <artifactId>sql-pgsql</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.dromara.solon-plugins</groupId>
+            <artifactId>mapstruct-plus-solon-plugin</artifactId>
         </dependency>
     </dependencies>
 
