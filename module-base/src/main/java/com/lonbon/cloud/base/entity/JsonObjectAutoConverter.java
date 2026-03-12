@@ -1,0 +1,58 @@
+package com.lonbon.cloud.base.entity;
+
+import com.easy.query.core.basic.extension.conversion.ValueAutoConverter;
+import com.easy.query.core.metadata.ColumnMetadata;
+import com.easy.query.core.util.EasyClassUtil;
+import com.easy.query.core.util.EasyMapUtil;
+import org.jspecify.annotations.NonNull;
+import org.jspecify.annotations.Nullable;
+import org.noear.snack4.ONode;
+import org.noear.solon.annotation.Component;
+import org.postgresql.util.PGobject;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Type;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
+@Component
+public class JsonObjectAutoConverter implements ValueAutoConverter<Object, Object> {
+
+    private static final Map<ColumnMetadata, Type> cacheMap = new ConcurrentHashMap<>();
+
+    @Override
+    public boolean apply(@NonNull Class<?> entityClass, @NonNull Class<Object> propertyType) {
+        return JsonObject.class.isAssignableFrom(propertyType);
+    }
+
+    @Override
+    public @Nullable Object serialize(@Nullable Object o, @NonNull ColumnMetadata columnMetadata) {
+        return ONode.serialize(o);
+    }
+
+    @Override
+    public @Nullable Object deserialize(@Nullable Object s, @NonNull ColumnMetadata columnMetadata) {
+        return ONode.deserialize(getValueString(s), getFiledType(columnMetadata));
+    }
+
+    private @Nullable String getValueString(@Nullable Object s) {
+        return switch (s) {
+            case null -> null;
+            case String string -> string;
+            case PGobject pGobject -> pGobject.getValue();
+            default -> s.toString();
+        };
+    }
+
+    private Type getFiledType(ColumnMetadata columnMetadata) {
+        return EasyMapUtil.computeIfAbsent(cacheMap, columnMetadata, this::getFiledType0);
+    }
+
+    private Type getFiledType0(ColumnMetadata columnMetadata) {
+        Class<?> entityClass = columnMetadata.getEntityMetadata().getEntityClass();
+        Field declaredField = EasyClassUtil.getFieldByName(entityClass, columnMetadata.getPropertyName());
+        return declaredField.getGenericType();
+    }
+
+
+}

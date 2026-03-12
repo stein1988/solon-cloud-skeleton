@@ -1,10 +1,12 @@
 package com.lonbon.cloud.user.domain.entity;
 
+import com.easy.query.core.annotation.Column;
 import com.easy.query.core.annotation.EntityProxy;
 import com.easy.query.core.annotation.Table;
 import com.easy.query.core.proxy.ProxyEntityAvailable;
 import com.lonbon.cloud.base.entity.BaseEntity;
 import com.lonbon.cloud.user.domain.entity.proxy.TenantProxy;
+import com.lonbon.cloud.user.domain.value_object.TenantConfig;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
@@ -20,6 +22,6 @@ public class Tenant extends BaseEntity implements ProxyEntityAvailable<Tenant , 
     private boolean isDefault;
     private boolean isActive;
     private String domain;
-    private Map<String, Object> config;
+    private TenantConfig config;
     private boolean isSystem;
 }

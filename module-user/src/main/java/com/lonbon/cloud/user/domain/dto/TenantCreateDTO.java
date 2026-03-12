@@ -2,6 +2,7 @@ package com.lonbon.cloud.user.domain.dto;
 
 
 import com.lonbon.cloud.user.domain.entity.Tenant;
+import com.lonbon.cloud.user.domain.value_object.TenantConfig;
 import io.github.linpeilie.annotations.AutoMapper;
 import lombok.Data;
 import org.noear.solon.validation.annotation.NotEmpty;
@@ -25,7 +26,7 @@ public class TenantCreateDTO {
     private String name;
     private String description;
     private String domain;
-    private Map<String, Object> config;
+    private TenantConfig config;
 
 
 }

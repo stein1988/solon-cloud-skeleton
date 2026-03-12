@@ -3,12 +3,10 @@ package com.lonbon.cloud.base.plugin;
 import com.lonbon.cloud.base.config.EasyQueryConfiguration;
 import com.lonbon.cloud.base.config.SerializerConfiguration;
 import com.lonbon.cloud.base.config.UUIDConverter;
-import com.lonbon.cloud.base.entity.DefaultEntityInterceptor;
-import com.lonbon.cloud.base.entity.DefaultLogicDeleteStrategy;
-import com.lonbon.cloud.base.entity.OffsetDateTimeTypeHandler;
-import com.lonbon.cloud.base.entity.UUIDPrimaryKeyGenerator;
+import com.lonbon.cloud.base.entity.*;
 import com.lonbon.cloud.base.exception.ExceptionFilter;
 import org.noear.solon.core.AppContext;
+import org.noear.solon.core.BeanWrap;
 import org.noear.solon.core.Plugin;
 
 /**
@@ -57,6 +55,11 @@ public class BaseSolonPlugin implements Plugin {
         
         // 注册 UUID 主键生成器
         context.beanMake(UUIDPrimaryKeyGenerator.class);
+
+        // 注册 json 对象转换器
+        context.beanMake(JsonObjectAutoConverter.class);
+
+        context.beanMake(JsonStringTypeHandler.class);
         
         // 注册 Easy-Query 框架配置
         context.beanMake(EasyQueryConfiguration.class);

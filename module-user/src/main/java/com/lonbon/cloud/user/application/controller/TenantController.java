@@ -61,12 +61,8 @@ public class TenantController {
     @Get
     @Mapping("/{id}")
     public Response<Tenant> getTenantById(@Path("id") UUID id) {
-        try {
-            Optional<Tenant> tenant = tenantService.getTenantById(id);
-            return tenant.map(Response::success).orElseGet(() -> Response.error("Tenant not found"));
-        } catch (Exception e) {
-            return Response.error("Failed to get tenant: " + e.getMessage());
-        }
+        Optional<Tenant> tenant = tenantService.getTenantById(id);
+        return tenant.map(Response::success).orElseGet(() -> Response.error("Tenant not found"));
     }
 
     @Operation(summary = "查询单个（根据名称）")

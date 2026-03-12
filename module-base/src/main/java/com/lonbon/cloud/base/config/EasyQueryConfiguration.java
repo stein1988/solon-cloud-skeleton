@@ -1,6 +1,7 @@
 package com.lonbon.cloud.base.config;
 
 import com.easy.query.core.basic.extension.conversion.ColumnValueSQLConverter;
+import com.easy.query.core.basic.extension.conversion.ValueAutoConverter;
 import com.easy.query.core.basic.extension.conversion.ValueConverter;
 import com.easy.query.core.basic.extension.encryption.EncryptionStrategy;
 import com.easy.query.core.basic.extension.generated.GeneratedKeySQLColumnGenerator;
@@ -72,6 +73,7 @@ public class EasyQueryConfiguration {
                                         @Inject List<EncryptionStrategy> encryptionStrategyList,
                                         @Inject List<VersionStrategy> versionStrategyList,
                                         @Inject List<ValueConverter<?,?>> valueConverterList,
+                                        @Inject List<ValueAutoConverter<?, ?>> valueAutoConverterList,
                                         @Inject List<ColumnValueSQLConverter> columnValueSQLConverterList,
                                         @Inject List<GeneratedKeySQLColumnGenerator> generatedKeySQLColumnGeneratorList,
                                         @Inject List<NavigateExtraFilterStrategy> navigateExtraFilterStrategyList,
@@ -113,6 +115,11 @@ public class EasyQueryConfiguration {
         // 注册值转换器
         for (ValueConverter<?,?> valueConverter : valueConverterList) {
             configuration.applyValueConverter(valueConverter);
+        }
+
+        // 注册全局值转换器，valueConverterList参数接受不到ValueAutoConverter，只能再加一个参数来接受
+        for (ValueAutoConverter<?, ?> valueAutoConverter : valueAutoConverterList) {
+            configuration.applyValueConverter(valueAutoConverter);
         }
 
         // 注册列值SQL转换器
