@@ -29,12 +29,8 @@ public class TenantController {
     @Post
     @Mapping
     public Response<UUID> createTenant(@Body @Validated TenantCreateDTO tenant) {
-        try {
-            Tenant createdTenant = tenantService.createTenant(tenant);
-            return Response.success(createdTenant.getId(), "Tenant created successfully");
-        } catch (Exception e) {
-            return Response.error("Failed to create tenant: " + e.getMessage());
-        }
+        Tenant createdTenant = tenantService.createTenant(tenant);
+        return Response.success(createdTenant.getId(), "Tenant created successfully");
     }
 
     @Operation(summary = "更新")
