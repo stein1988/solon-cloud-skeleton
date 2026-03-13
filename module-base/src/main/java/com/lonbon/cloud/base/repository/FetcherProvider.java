@@ -12,10 +12,3 @@ public interface FetcherProvider<
         > {
     TChain apply(TProxy proxy);
 }
-
-
-//@FunctionalInterface
-//public interface SQLFuncExpression1<T1,TR> {
-//
-//    TR apply(T1 p1);
-//}

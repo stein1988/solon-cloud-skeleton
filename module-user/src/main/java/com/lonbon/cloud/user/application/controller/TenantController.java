@@ -1,7 +1,6 @@
 package com.lonbon.cloud.user.application.controller;
 
 import com.lonbon.cloud.common.utils.Response;
-import com.lonbon.cloud.user.application.dto.TenantDto;
 import com.lonbon.cloud.user.domain.dto.TenantCreateDTO;
 import com.lonbon.cloud.user.domain.dto.TenantUpdateDTO;
 import com.lonbon.cloud.user.domain.entity.Tenant;
@@ -12,7 +11,6 @@ import lombok.extern.slf4j.Slf4j;
 import org.noear.solon.annotation.*;
 import org.noear.solon.validation.annotation.*;
 
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 

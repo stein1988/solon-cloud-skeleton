@@ -1,6 +1,5 @@
 package com.lonbon.cloud.user.application.service;
 
-import com.lonbon.cloud.user.application.dto.TenantDto;
 import com.lonbon.cloud.user.domain.dto.TenantCreateDTO;
 import com.lonbon.cloud.user.domain.dto.TenantUpdateDTO;
 import com.lonbon.cloud.user.domain.entity.Tenant;
@@ -10,7 +9,6 @@ import io.github.linpeilie.Converter;
 import org.noear.solon.annotation.Component;
 import org.noear.solon.annotation.Inject;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;

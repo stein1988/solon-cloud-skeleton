@@ -1,6 +1,5 @@
 package com.lonbon.cloud.user.domain.service;
 
-import com.lonbon.cloud.user.application.dto.TenantDto;
 import com.lonbon.cloud.user.domain.dto.TenantCreateDTO;
 import com.lonbon.cloud.user.domain.dto.TenantUpdateDTO;
 import com.lonbon.cloud.user.domain.entity.Tenant;
