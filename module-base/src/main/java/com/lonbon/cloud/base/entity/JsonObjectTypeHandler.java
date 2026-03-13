@@ -5,18 +5,16 @@ import com.easy.query.core.basic.jdbc.executor.internal.props.JdbcProperty;
 import com.easy.query.core.basic.jdbc.parameter.SQLParameter;
 import com.easy.query.core.basic.jdbc.types.EasyParameter;
 import lombok.extern.slf4j.Slf4j;
-import org.jspecify.annotations.NonNull;
-import org.noear.solon.annotation.Component;
+import org.jetbrains.annotations.NotNull;
 import org.postgresql.util.PGobject;
 
 import java.sql.JDBCType;
 import java.sql.SQLException;
 
 @Slf4j
-@Component
 public class JsonObjectTypeHandler implements JdbcTypeHandlerConfigurer{
     @Override
-    public @NonNull Class<?> getType() {
+    public @NotNull Class<?> getType() {
         return String.class;
     }
 

@@ -3,9 +3,7 @@ package com.lonbon.cloud.base.entity;
 import com.easy.query.core.basic.jdbc.executor.internal.merge.result.StreamResultSet;
 import com.easy.query.core.basic.jdbc.executor.internal.props.JdbcProperty;
 import com.easy.query.core.basic.jdbc.types.EasyParameter;
-import com.easy.query.core.basic.jdbc.types.handler.JdbcTypeHandler;
-import org.jspecify.annotations.NonNull;
-import org.noear.solon.annotation.Component;
+import org.jetbrains.annotations.NotNull;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -17,8 +15,6 @@ import java.time.ZoneOffset;
  * PostgreSQL timestamptz 类型与 Java OffsetDateTime 类型的处理器
  * TODO：其他类型数据库的带时区时间戳字段测试
  */
-
-@Component
 public class OffsetDateTimeTypeHandler implements JdbcTypeHandlerConfigurer {
 
 //    private static final Logger log = LoggerFactory.getLogger(OffsetDateTimeTypeHandler.class);
@@ -26,7 +22,7 @@ public class OffsetDateTimeTypeHandler implements JdbcTypeHandlerConfigurer {
 //    public static final OffsetDateTimeTypeHandler INSTANCE = new OffsetDateTimeTypeHandler();
 
     @Override
-    public @NonNull Class<?> getType() {
+    public @NotNull Class<?> getType() {
         return OffsetDateTime.class;
     }
 

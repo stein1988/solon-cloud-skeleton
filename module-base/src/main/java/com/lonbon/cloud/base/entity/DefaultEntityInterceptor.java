@@ -7,14 +7,11 @@ import com.easy.query.core.expression.parser.core.base.ColumnOnlySelector;
 import com.easy.query.core.expression.parser.core.base.ColumnSetter;
 import com.easy.query.core.expression.sql.builder.EntityInsertExpressionBuilder;
 import com.easy.query.core.expression.sql.builder.EntityUpdateExpressionBuilder;
-import lombok.AllArgsConstructor;
-import org.jspecify.annotations.NonNull;
-import org.noear.solon.annotation.Component;
+import org.jetbrains.annotations.NotNull;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
-@Component
 public class DefaultEntityInterceptor implements EntityInterceptor, UpdateSetInterceptor, UpdateEntityColumnInterceptor {
 
     @Override
@@ -26,7 +23,7 @@ public class DefaultEntityInterceptor implements EntityInterceptor, UpdateSetInt
      * 哪些对象需要用到这个拦截器(继承BaseEntity的对象)
      */
     @Override
-    public boolean apply(@NonNull Class<?> entityClass) {
+    public boolean apply(@NotNull Class<?> entityClass) {
         return BaseEntity.class.isAssignableFrom(entityClass);
     }
 
@@ -76,7 +73,7 @@ public class DefaultEntityInterceptor implements EntityInterceptor, UpdateSetInt
     }
 
     @Override
-    public void configure(@NonNull Class<?> entityClass, @NonNull EntityUpdateExpressionBuilder entityUpdateExpressionBuilder, @NonNull ColumnOnlySelector<Object> columnSelector, @NonNull Object entity) {
+    public void configure(@NotNull Class<?> entityClass, @NotNull EntityUpdateExpressionBuilder entityUpdateExpressionBuilder, @NotNull ColumnOnlySelector<Object> columnSelector, @NotNull Object entity) {
 
     }
 

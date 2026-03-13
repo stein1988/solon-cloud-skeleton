@@ -4,11 +4,10 @@ import com.easy.query.core.basic.extension.conversion.ValueAutoConverter;
 import com.easy.query.core.metadata.ColumnMetadata;
 import com.easy.query.core.util.EasyClassUtil;
 import com.easy.query.core.util.EasyMapUtil;
-import org.jspecify.annotations.NonNull;
-import org.jspecify.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import org.noear.snack4.ONode;
 import org.noear.solon.annotation.Component;
-import org.postgresql.util.PGobject;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
@@ -21,17 +20,17 @@ public class JsonObjectAutoConverter implements ValueAutoConverter<Object, Objec
     private static final Map<ColumnMetadata, Type> cacheMap = new ConcurrentHashMap<>();
 
     @Override
-    public boolean apply(@NonNull Class<?> entityClass, @NonNull Class<Object> propertyType) {
+    public boolean apply(@NotNull Class<?> entityClass, @NotNull Class<Object> propertyType) {
         return JsonObject.class.isAssignableFrom(propertyType);
     }
 
     @Override
-    public @Nullable Object serialize(@Nullable Object o, @NonNull ColumnMetadata columnMetadata) {
+    public @Nullable Object serialize(@Nullable Object o, @NotNull ColumnMetadata columnMetadata) {
         return ONode.serialize(o);
     }
 
     @Override
-    public @Nullable Object deserialize(@Nullable Object s, @NonNull ColumnMetadata columnMetadata) {
+    public @Nullable Object deserialize(@Nullable Object s, @NotNull ColumnMetadata columnMetadata) {
         return ONode.deserialize(getValueString(s), getFiledType(columnMetadata));
     }
 
