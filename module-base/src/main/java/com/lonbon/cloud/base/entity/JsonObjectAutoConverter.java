@@ -39,8 +39,7 @@ public class JsonObjectAutoConverter implements ValueAutoConverter<Object, Objec
         return switch (s) {
             case null -> null;
             case String string -> string;
-            case PGobject pGobject -> pGobject.getValue();
-            default -> s.toString();
+            default -> s.toString();     // 这里包括了PGobject jsonb类型的处理
         };
     }
 

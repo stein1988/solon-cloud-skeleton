@@ -4,6 +4,7 @@ import com.easy.query.core.basic.jdbc.executor.internal.merge.result.StreamResul
 import com.easy.query.core.basic.jdbc.executor.internal.props.JdbcProperty;
 import com.easy.query.core.basic.jdbc.parameter.SQLParameter;
 import com.easy.query.core.basic.jdbc.types.EasyParameter;
+import lombok.extern.slf4j.Slf4j;
 import org.jspecify.annotations.NonNull;
 import org.noear.solon.annotation.Component;
 import org.postgresql.util.PGobject;
@@ -11,8 +12,9 @@ import org.postgresql.util.PGobject;
 import java.sql.JDBCType;
 import java.sql.SQLException;
 
+@Slf4j
 @Component
-public class JsonStringTypeHandler implements JdbcTypeHandlerConfigurer{
+public class JsonObjectTypeHandler implements JdbcTypeHandlerConfigurer{
     @Override
     public @NonNull Class<?> getType() {
         return String.class;
@@ -20,11 +22,6 @@ public class JsonStringTypeHandler implements JdbcTypeHandlerConfigurer{
 
     @Override
     public Object getValue(JdbcProperty jdbcProperty, StreamResultSet streamResultSet) throws SQLException {
-        Class<?> propertyType = jdbcProperty.getPropertyType();
-        if (JsonObject.class.isAssignableFrom(propertyType)) {
-            PGobject value = streamResultSet.getObject(jdbcProperty.getJdbcIndex(), PGobject.class);
-            return value.getValue();
-        }
         return streamResultSet.getString(jdbcProperty.getJdbcIndex());
     }
 

@@ -13,6 +13,7 @@ import com.easy.query.core.basic.extension.navigate.NavigateValueSetter;
 import com.easy.query.core.basic.extension.version.VersionStrategy;
 import com.easy.query.core.basic.jdbc.types.JdbcTypeHandlerManager;
 import com.easy.query.core.configuration.QueryConfiguration;
+import com.easy.query.core.configuration.dialect.SQLKeyword;
 import com.easy.query.core.context.QueryRuntimeContext;
 import com.easy.query.core.sharding.initializer.ShardingInitializer;
 import com.easy.query.core.sharding.route.datasource.DataSourceRoute;
@@ -83,9 +84,12 @@ public class EasyQueryConfiguration {
                                         @Inject List<DataSourceRoute<?>> dataSourceRouteList,
                                         @Inject List<JdbcTypeHandlerConfigurer> jdbcTypeHandlerConfigurerList
     ) {
+//        String databaseProductName = runtimeContext.getEasyQueryDataSource().getDatabaseProductName();
 
         // 获取查询配置
         QueryConfiguration configuration = runtimeContext.getQueryConfiguration();
+
+        SQLKeyword sqlKeyword = configuration.getDialect();
 
         // 注册拦截器
         for (Interceptor interceptor : interceptorList) {

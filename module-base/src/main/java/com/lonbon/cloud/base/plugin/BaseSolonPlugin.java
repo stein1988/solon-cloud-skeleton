@@ -6,7 +6,6 @@ import com.lonbon.cloud.base.config.UUIDConverter;
 import com.lonbon.cloud.base.entity.*;
 import com.lonbon.cloud.base.exception.ExceptionFilter;
 import org.noear.solon.core.AppContext;
-import org.noear.solon.core.BeanWrap;
 import org.noear.solon.core.Plugin;
 
 /**
@@ -59,7 +58,7 @@ public class BaseSolonPlugin implements Plugin {
         // 注册 json 对象转换器
         context.beanMake(JsonObjectAutoConverter.class);
 
-        context.beanMake(JsonStringTypeHandler.class);
+        context.beanMake(JsonObjectTypeHandler.class);
         
         // 注册 Easy-Query 框架配置
         context.beanMake(EasyQueryConfiguration.class);

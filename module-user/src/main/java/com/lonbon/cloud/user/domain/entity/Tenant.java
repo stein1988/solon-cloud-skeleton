@@ -5,6 +5,7 @@ import com.easy.query.core.annotation.EntityProxy;
 import com.easy.query.core.annotation.Table;
 import com.easy.query.core.proxy.ProxyEntityAvailable;
 import com.lonbon.cloud.base.entity.BaseEntity;
+import com.lonbon.cloud.base.entity.JsonObjectTypeHandler;
 import com.lonbon.cloud.user.domain.entity.proxy.TenantProxy;
 import com.lonbon.cloud.user.domain.value_object.TenantConfig;
 import lombok.Data;
