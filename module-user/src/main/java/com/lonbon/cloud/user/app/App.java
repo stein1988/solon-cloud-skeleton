@@ -1,12 +1,8 @@
 package com.lonbon.cloud.user.app;
 
-import com.lonbon.cloud.base.config.UUIDConverter;
 import org.noear.solon.Solon;
-import org.noear.solon.annotation.Bean;
-import org.noear.solon.annotation.Configuration;
 import org.noear.solon.annotation.Import;
 import org.noear.solon.annotation.SolonMain;
-import org.noear.solon.docs.DocDocket;
 
 @SolonMain
 @Import(scanPackages = {"com.lonbon.cloud.user"})

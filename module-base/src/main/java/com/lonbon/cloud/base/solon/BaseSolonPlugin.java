@@ -1,8 +1,5 @@
-package com.lonbon.cloud.base.plugin;
+package com.lonbon.cloud.base.solon;
 
-import com.lonbon.cloud.base.config.EasyQueryConfiguration;
-import com.lonbon.cloud.base.config.SerializerConfiguration;
-import com.lonbon.cloud.base.config.UUIDConverter;
 import com.lonbon.cloud.base.entity.*;
 import com.lonbon.cloud.base.exception.ExceptionFilter;
 import org.noear.solon.core.AppContext;

@@ -4,18 +4,26 @@ import com.easy.query.core.basic.jdbc.executor.internal.merge.result.StreamResul
 import com.easy.query.core.basic.jdbc.executor.internal.props.JdbcProperty;
 import com.easy.query.core.basic.jdbc.parameter.SQLParameter;
 import com.easy.query.core.basic.jdbc.types.EasyParameter;
-import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
+import com.easy.query.core.basic.jdbc.types.handler.JdbcTypeHandler;
+import com.lonbon.cloud.base.solon.JdbcTypeHandlerReplaceConfigurer;
+import org.noear.solon.annotation.Component;
 import org.postgresql.util.PGobject;
 
 import java.sql.JDBCType;
 import java.sql.SQLException;
+import java.util.Set;
 
-@Slf4j
-public class JsonObjectTypeHandler implements JdbcTypeHandlerConfigurer{
+@Component
+public class JsonObjectTypeHandler implements JdbcTypeHandler, JdbcTypeHandlerReplaceConfigurer {
+
     @Override
-    public @NotNull Class<?> getType() {
-        return String.class;
+    public boolean replace() {
+        return true;
+    }
+
+    @Override
+    public Set<Class<?>> allowTypes() {
+        return Set.of(String.class);
     }
 
     @Override

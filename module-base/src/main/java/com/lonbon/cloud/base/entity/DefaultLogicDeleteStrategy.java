@@ -6,13 +6,13 @@ import com.easy.query.core.basic.extension.logicdel.abstraction.AbstractLogicDel
 import com.easy.query.core.expression.lambda.SQLActionExpression1;
 import com.easy.query.core.expression.parser.core.base.ColumnSetter;
 import com.easy.query.core.expression.parser.core.base.WherePredicate;
-import lombok.RequiredArgsConstructor;
+import org.noear.solon.annotation.Component;
 
 import java.time.OffsetDateTime;
 import java.util.Set;
 import java.util.UUID;
 
-@RequiredArgsConstructor
+@Component
 public class DefaultLogicDeleteStrategy extends AbstractLogicDeleteStrategy {
 //    private final CurrentUser currentUser;
     @Override

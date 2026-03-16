@@ -1,4 +1,4 @@
-package com.lonbon.cloud.base.config;
+package com.lonbon.cloud.base.solon;
 
 import org.noear.solon.annotation.Bean;
 import org.noear.solon.annotation.Component;

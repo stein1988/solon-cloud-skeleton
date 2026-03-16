@@ -8,10 +8,12 @@ import com.easy.query.core.expression.parser.core.base.ColumnSetter;
 import com.easy.query.core.expression.sql.builder.EntityInsertExpressionBuilder;
 import com.easy.query.core.expression.sql.builder.EntityUpdateExpressionBuilder;
 import org.jetbrains.annotations.NotNull;
+import org.noear.solon.annotation.Component;
 
 import java.time.OffsetDateTime;
 import java.util.UUID;
 
+@Component
 public class DefaultEntityInterceptor implements EntityInterceptor, UpdateSetInterceptor, UpdateEntityColumnInterceptor {
 
     @Override

@@ -2,9 +2,11 @@ package com.lonbon.cloud.base.entity;
 
 import com.easy.query.core.basic.extension.generated.PrimaryKeyGenerator;
 import com.github.f4b6a3.uuid.UuidCreator;
+import org.noear.solon.annotation.Component;
 
 import java.io.Serializable;
 
+@Component
 public class UUIDPrimaryKeyGenerator implements PrimaryKeyGenerator {
     @Override
     public Serializable getPrimaryKey() {

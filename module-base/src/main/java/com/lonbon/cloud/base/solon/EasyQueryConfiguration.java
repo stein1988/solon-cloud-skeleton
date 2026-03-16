@@ -1,4 +1,4 @@
-package com.lonbon.cloud.base.config;
+package com.lonbon.cloud.base.solon;
 
 import com.easy.query.core.basic.extension.conversion.ColumnValueSQLConverter;
 import com.easy.query.core.basic.extension.conversion.ValueAutoConverter;
@@ -12,6 +12,7 @@ import com.easy.query.core.basic.extension.navigate.NavigateExtraFilterStrategy;
 import com.easy.query.core.basic.extension.navigate.NavigateValueSetter;
 import com.easy.query.core.basic.extension.version.VersionStrategy;
 import com.easy.query.core.basic.jdbc.types.JdbcTypeHandlerManager;
+import com.easy.query.core.basic.jdbc.types.handler.JdbcTypeHandler;
 import com.easy.query.core.configuration.QueryConfiguration;
 import com.easy.query.core.configuration.dialect.SQLKeyword;
 import com.easy.query.core.context.QueryRuntimeContext;
@@ -21,7 +22,6 @@ import com.easy.query.core.sharding.route.table.TableRoute;
 import com.easy.query.core.sharding.router.manager.DataSourceRouteManager;
 import com.easy.query.core.sharding.router.manager.TableRouteManager;
 import com.easy.query.solon.annotation.Db;
-import com.lonbon.cloud.base.entity.JdbcTypeHandlerConfigurer;
 
 import org.noear.solon.annotation.Bean;
 import org.noear.solon.annotation.Configuration;
@@ -82,7 +82,7 @@ public class EasyQueryConfiguration {
                                         @Inject List<PrimaryKeyGenerator> primaryKeyGeneratorList,
                                         @Inject List<TableRoute<?>> tableRouteList,
                                         @Inject List<DataSourceRoute<?>> dataSourceRouteList,
-                                        @Inject List<JdbcTypeHandlerConfigurer> jdbcTypeHandlerConfigurerList
+                                        @Inject List<JdbcTypeHandlerReplaceConfigurer> jdbcTypeHandlerConfigurerList
     ) {
 //        String databaseProductName = runtimeContext.getEasyQueryDataSource().getDatabaseProductName();
 
@@ -165,8 +165,14 @@ public class EasyQueryConfiguration {
 
         // 注册JDBC类型处理器
         JdbcTypeHandlerManager jdbcTypeHandlerManager = runtimeContext.getJdbcTypeHandlerManager();
-        for (JdbcTypeHandlerConfigurer jdbcTypeHandlerConfigurer : jdbcTypeHandlerConfigurerList) {
-            jdbcTypeHandlerManager.appendHandler(jdbcTypeHandlerConfigurer.getType(), jdbcTypeHandlerConfigurer, true);
+        for (JdbcTypeHandlerReplaceConfigurer typeHandlerConfigurer : jdbcTypeHandlerConfigurerList) {
+            if (typeHandlerConfigurer instanceof JdbcTypeHandler jdbcTypeHandler) {
+                for (Class<?> type : typeHandlerConfigurer.allowTypes()) {
+                    jdbcTypeHandlerManager.appendHandler(type, jdbcTypeHandler, typeHandlerConfigurer.replace());
+                }
+            } else {
+                throw new RuntimeException("JdbcTypeHandlerConfigurer must implement JdbcTypeHandler interface: " + typeHandlerConfigurer.getClass().getName());
+            }
         }
     }
 }

@@ -1,4 +1,4 @@
-package com.lonbon.cloud.base.config;
+package com.lonbon.cloud.base.solon;
 
 import org.noear.solon.annotation.Component;
 import org.noear.solon.core.convert.Converter;

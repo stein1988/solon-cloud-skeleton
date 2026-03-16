@@ -3,40 +3,40 @@ package com.lonbon.cloud.base.entity;
 import com.easy.query.core.basic.jdbc.executor.internal.merge.result.StreamResultSet;
 import com.easy.query.core.basic.jdbc.executor.internal.props.JdbcProperty;
 import com.easy.query.core.basic.jdbc.types.EasyParameter;
-import org.jetbrains.annotations.NotNull;
+import com.easy.query.core.basic.jdbc.types.handler.JdbcTypeHandler;
+import com.lonbon.cloud.base.solon.JdbcTypeHandlerReplaceConfigurer;
+import org.noear.solon.annotation.Component;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.sql.Types;
 import java.time.OffsetDateTime;
 import java.time.ZoneOffset;
+import java.util.Set;
 
 /**
  * PostgreSQL timestamptz 类型与 Java OffsetDateTime 类型的处理器
  * TODO：其他类型数据库的带时区时间戳字段测试
  */
-public class OffsetDateTimeTypeHandler implements JdbcTypeHandlerConfigurer {
-
-//    private static final Logger log = LoggerFactory.getLogger(OffsetDateTimeTypeHandler.class);
-
-//    public static final OffsetDateTimeTypeHandler INSTANCE = new OffsetDateTimeTypeHandler();
+@Component
+public class OffsetDateTimeTypeHandler implements JdbcTypeHandler, JdbcTypeHandlerReplaceConfigurer {
 
     @Override
-    public @NotNull Class<?> getType() {
-        return OffsetDateTime.class;
+    public boolean replace() {
+        return true;
     }
 
+    @Override
+    public Set<Class<?>> allowTypes() {
+        return Set.of(OffsetDateTime.class);
+    }
+    
     @Override
     public Object getValue(JdbcProperty jdbcProperty, StreamResultSet streamResultSet) throws SQLException {
         Timestamp timestamp = streamResultSet.getTimestamp(jdbcProperty.getJdbcIndex());
         if (timestamp == null) {
             return null;
         }
-        // 将 Timestamp 转换为 OffsetDateTime
-//        LocalDateTime localDateTime = timestamp.toLocalDateTime();
-//        log.info("localDateTime={}", localDateTime);
-        //        log.info("offsetDateTime={}", offsetDateTime);
-
         return timestamp.toInstant().atOffset(ZoneOffset.UTC);
     }
 
@@ -51,6 +51,4 @@ public class OffsetDateTimeTypeHandler implements JdbcTypeHandlerConfigurer {
             parameter.getPs().setTimestamp(parameter.getIndex(), timestamp);
         }
     }
-
-
 }
